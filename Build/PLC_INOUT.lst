@@ -1,0 +1,1029 @@
+***********************************************************************
+*
+*	CODE GENERATION LISTING FOR: PLC_INOUT
+*	COMPILER VERSION: 5.22.0.18
+*
+***********************************************************************
+
+**************************************************
+	CODE GENERATOR SUBROUTINES
+**************************************************
+
+$$MOD:
+30000350  FB90 F3F1		sdiv r3, r0, r1
+30000354  4359     		mul r1, r1, r3
+30000356  EBC1 0000		rsb r0, r1, r0
+3000035A  4770     		bx lr
+
+$$MOD_U:
+3000035C  FBB0 F3F1		udiv r3, r0, r1
+30000360  4359     		mul r1, r1, r3
+30000362  EBC1 0000		rsb r0, r1, r0
+30000366  4770     		bx lr
+
+**************************************************
+	List program: main
+**************************************************
+
+PROGRAM main
+
+END_PROGRAM
+
+30000370  B082     		sub sp, sp, #8
+30000372  F8CD E000		str lr, [sp]
+30000376  E92D 0FF0		stmdb sp!, { r4, r5, r6, r7, r8, r9, r10, r11 }
+
+#0		{SRC:main}
+#1		(*$WAITSWITCH$*)
+#2		
+#3			(* cnt := cnt + 1; *)
+#4			LD		cnt	{LNXT:2|3|-1}
+(*) UNDEF
+3000037A  F8DF 7044		ldr r7, [pc, #+68] ; 0x2403C4B6
+3000037E  F9B7 0000		ldrsh r0, [r7]
+
+#5			ADD		1	{LNXT:2|3|-1}
+(-) INT
+30000382  1C40     		add r0, r0, #1
+
+#6			ST		cnt	{LNXT:2|3|-1}
+(*) INT
+30000384  F8DF 7038		ldr r7, [pc, #+56] ; 0x2403C4B6
+30000388  8038     		strh r0, [r7]
+
+#7		
+#8			(* conta2 := conta2 + 1; *)
+#9			LD		conta2	{LNXT:3|5|-1}
+(*) UNDEF
+3000038A  F8DF 7030		ldr r7, [pc, #+48] ; 0x2403C4B4
+3000038E  7838     		ldrb r0, [r7]
+
+#10			ADD		1	{LNXT:3|5|-1}
+(-) USINT
+30000390  1C40     		add r0, r0, #1
+
+#11			ST		conta2	{LNXT:3|5|-1}
+(*) USINT
+30000392  F8DF 7028		ldr r7, [pc, #+40] ; 0x2403C4B4
+30000396  7038     		strb r0, [r7]
+
+#12		
+#13			(* sysUserDataBlock[0] := conta2; *)
+#14			MOVE		conta2,sysUserDataBlock[0]	{LNXT:5|6|-1}
+(*) USINT
+30000398  F8DF 7020		ldr r7, [pc, #+32] ; 0x2403C4B4
+3000039C  7838     		ldrb r0, [r7]
+3000039E  F8DF 7014		ldr r7, [pc, #+20] ; 0x2403B4B0
+300003A2  7038     		strb r0, [r7]
+
+#15		
+#16			(* registriMapped[0] := conta2; *)
+#17			MOVE		conta2,registriMapped[0]	{LNXT:6|2|-1}
+(*) USINT
+300003A4  F8DF 7014		ldr r7, [pc, #+20] ; 0x2403C4B4
+300003A8  7838     		ldrb r0, [r7]
+300003AA  F8DF 700C		ldr r7, [pc, #+12] ; 0x2403B4B2
+300003AE  7038     		strb r0, [r7]
+
+300003B0  E008     		b #16
+
+300003B4  FFFFFFFF		; 0x2403B4B0
+300003B8  FFFFFFFF		; 0x2403B4B2
+300003BC  FFFFFFFF		; 0x2403C4B4
+300003C0  FFFFFFFF		; 0x2403C4B6
+
+END_PROGRAM
+**************************************************
+	List program: Plc_Coils
+**************************************************
+
+PROGRAM Plc_Coils
+
+        VAR CONSTANT
+UNO : WORD := 1;
+ZERO : WORD := 0;
+	END_VAR
+
+END_PROGRAM
+
+#0			{SRC:Plc_Coils}
+#1		 
+#2		  
+#3			(* Network 1 *)
+#4			LD		BUTTUSR {R:1$0}
+(*) UNDEF
+300003C4  F8DF 70CC		ldr r7, [pc, #+204] ; 0x2403D988
+300003C8  7838     		ldrb r0, [r7]
+
+#5			ST		RELE01 {R:1$1}
+(*) BOOL
+300003CA  F8DF 70CC		ldr r7, [pc, #+204] ; 0x2403D989
+300003CE  7038     		strb r0, [r7]
+
+#6		 
+#7			(* Network 2 *)
+#8			LD		RELE01 {R:2$0}
+(*) UNDEF
+300003D0  F8DF 70C4		ldr r7, [pc, #+196] ; 0x2403D989
+300003D4  7838     		ldrb r0, [r7]
+
+#9			ST		LED01 {R:2$1}
+(*) BOOL
+300003D6  F8DF 70AC		ldr r7, [pc, #+172] ; 0x2403D970
+300003DA  7038     		strb r0, [r7]
+
+#10		 
+#11			(* Network 3 *)
+#12			LD		SYSBUTTONINPUTS[0] {R:3$0}
+(*) UNDEF
+300003DC  F8DF 70B4		ldr r7, [pc, #+180] ; 0x2403D988
+300003E0  7838     		ldrb r0, [r7]
+
+#13			ST		LEDBLUE {R:3$1}
+(*) BOOL
+300003E2  F8DF 70A8		ldr r7, [pc, #+168] ; 0x2403D976
+300003E6  7038     		strb r0, [r7]
+
+#14		 
+#15			(* Network 4 *)
+#16			LD		IN01 {R:4$2}
+(*) UNDEF
+300003E8  F8DF 70A4		ldr r7, [pc, #+164] ; 0x2403D978
+300003EC  7838     		ldrb r0, [r7]
+
+#17			JMPCN	$$LAB$1
+(-) BOOL
+300003EE  2800     		cmp r0, #0
+300003F0  D009     		beq #18 ; 0x30000406
+
+
+#18			LDP0		UNO {R:4$9}
+(-) BOOL
+#19			ABS	 {R:4$8}
+(-) WORD
+#20			ST		COMBO {R:4$10}
+(*) WORD
+300003F4  F8DF 7088		ldr r7, [pc, #+136] ; 0x2403C4B2
+300003F8  B082     		sub sp, sp, #8
+300003FA  F8CD 0000		str r0, [sp]
+300003FE  7038     		strb r0, [r7]
+30000400  F8DD 0000		ldr r0, [sp]
+30000404  B002     		add sp, sp, #8
+
+#21		$$LAB$1:
+#22			LD		IN01
+(*) UNDEF
+30000406  F8DF 7088		ldr r7, [pc, #+136] ; 0x2403D978
+3000040A  7838     		ldrb r0, [r7]
+
+#23			ST		LEDRED {R:4$1}
+(*) BOOL
+3000040C  F8DF 7078		ldr r7, [pc, #+120] ; 0x2403D974
+30000410  7038     		strb r0, [r7]
+
+#24		 
+#25			(* Network 5 *)
+#26			LD		BUTTUSR {R:5$0}
+(*) UNDEF
+30000412  F8DF 7080		ldr r7, [pc, #+128] ; 0x2403D988
+30000416  7838     		ldrb r0, [r7]
+
+#27			ST		UTENTE {R:5$1}
+(*) BOOL
+30000418  F8DF 7060		ldr r7, [pc, #+96] ; 0x2403C4B0
+3000041C  7038     		strb r0, [r7]
+
+#28		 
+#29			(* Network 6 *)
+#30			LDN		BUTTUSR {R:6$0}
+(*) UNDEF
+3000041E  F8DF 7074		ldr r7, [pc, #+116] ; 0x2403D988
+30000422  7838     		ldrb r0, [r7]
+30000424  2800     		cmp r0, #0
+30000426  BF08 2001		eqmov r0, #1
+3000042A  BF18 2000		nemov r0, #0
+
+#31			STN		UTENTE {R:6$1}
+(*) BOOL
+3000042E  F8DF 704C		ldr r7, [pc, #+76] ; 0x2403C4B0
+30000432  B082     		sub sp, sp, #8
+30000434  F8CD 0000		str r0, [sp]
+30000438  2800     		cmp r0, #0
+3000043A  BF08 2001		eqmov r0, #1
+3000043E  BF18 2000		nemov r0, #0
+30000442  7038     		strb r0, [r7]
+30000444  F8DD 0000		ldr r0, [sp]
+30000448  B002     		add sp, sp, #8
+
+#32		 
+#33			(* Network 7 *)
+#34			LDP0		IN01 {R:7$7}
+(-) BOOL
+#35			SEL	ZERO, UNO {R:7$6}
+(*) BOOL
+3000044A  F8DF 7044		ldr r7, [pc, #+68] ; 0x2403D978
+3000044E  7838     		ldrb r0, [r7]
+30000450  2800     		cmp r0, #0
+30000452  D101     		bne #0x000002
+30000454  2000     		mov r0, #0 ; 0
+30000456  E000     		b #0x000000
+30000458  2001     		mov r0, #1 ; 1
+
+#36			ST		COMBO {R:7$10}
+(*) WORD
+3000045A  F8DF 7024		ldr r7, [pc, #+36] ; 0x2403C4B2
+3000045E  B082     		sub sp, sp, #8
+30000460  F8CD 0000		str r0, [sp]
+30000464  7038     		strb r0, [r7]
+30000466  F8DD 0000		ldr r0, [sp]
+3000046A  B002     		add sp, sp, #8
+
+#37			LD		TRUE
+(-) UNDEF
+3000046C  2001     		mov r0, #1 ; 1
+
+3000046E  E8BD 0FF0		ldmia sp!, { r4, r5, r6, r7, r8, r9, r10, r11 }
+30000472  F8DD E000		ldr lr, [sp]
+30000476  B002     		add sp, sp, #8
+
+30000478  4770     		bx lr
+
+3000047C  FFFFFFFF		; 0x2403C4B0
+30000480  FFFFFFFF		; 0x2403C4B2
+30000484  FFFFFFFF		; 0x2403D970
+30000488  FFFFFFFF		; 0x2403D974
+3000048C  FFFFFFFF		; 0x2403D976
+30000490  FFFFFFFF		; 0x2403D978
+30000494  FFFFFFFF		; 0x2403D988
+30000498  FFFFFFFF		; 0x2403D989
+
+END_PROGRAM
+
+
+**************************************************
+	Target variable image generation
+**************************************************
+
+
+*** INPUT:
+3000049C  4770     		bx lr
+
+
+*** OUTPUT:
+3000049E  4770     		bx lr
+
+
+
+**************************************************
+	Task Fast init code
+**************************************************
+
+300004A0  B082     		sub sp, sp, #8
+300004A2  F8CD E000		str lr, [sp]
+300004A6  E92D 0FF0		stmdb sp!, { r4, r5, r6, r7, r8, r9, r10, r11 }
+
+300004AA  E8BD 0FF0		ldmia sp!, { r4, r5, r6, r7, r8, r9, r10, r11 }
+300004AE  F8DD E000		ldr lr, [sp]
+300004B2  B002     		add sp, sp, #8
+
+300004B4  4770     		bx lr
+
+**************************************************
+	List program: InitParDB
+**************************************************
+
+PROGRAM InitParDB
+
+        VAR
+warningsKiller : USINT;
+dummyCrc32 : UDINT;
+	END_VAR
+
+END_PROGRAM
+
+300004C0  B082     		sub sp, sp, #8
+300004C2  F8CD E000		str lr, [sp]
+300004C6  E92D 0FF0		stmdb sp!, { r4, r5, r6, r7, r8, r9, r10, r11 }
+
+#0		{SRC:InitParDB}
+#1		(*$WAITSWITCH$*)
+#2		
+#3			(* dummyCrc32 := 2465871022; *)
+#4			MOVE		2465871022,dummyCrc32	{LNXT:3|5|-1}
+(*) UDINT
+300004CA  F8DF 7084		ldr r7, [pc, #+132] ; 0x92FA34AE
+300004CE  4638     		mov r0, r7
+300004D0  F8DF 706C		ldr r7, [pc, #+108] ; 0x24002BD0
+300004D4  6038     		str r0, [r7]
+
+#5		
+#6			(* warningsKiller := sysDBase_SetExtTable( TO_DWORD( ADR($$ParDB) ), $$ParDBLength, 200, 0, 0, 2, 201, TO_DWORD( ADR(%MW201.0) ), 4, 2, 2465871022 ); *)
+#7			ADR		%MW201.0	{LNXT:5|3|-1}
+(*) UDINT
+300004D6  F8DF 0070		ldr r0, [pc, #+112] ; 0x2403C4B0
+
+#8			TO_DWORD	{LNXT:5|3|-1}
+(-) @WORD
+#9			ST		$$TMP3	{LNXT:5|3|-1}
+(*) DWORD
+300004DA  F8DF 7068		ldr r7, [pc, #+104] ; 0x24002BD4
+300004DE  6038     		str r0, [r7]
+
+#10			ADR		$$ParDB	{LNXT:5|3|-1}
+(*) DWORD
+300004E0  F8DF 0068		ldr r0, [pc, #+104] ; 0x300000A0
+
+#11			TO_DWORD	{LNXT:5|3|-1}
+(-) @USINT
+#12			sysDBase_SetExtTable		$$ParDBLength, 200, 0, 0, 2, 201, $$TMP3, 4, 2, 2465871022	{LNXT:5|3|-1}
+(*) DWORD
+300004E4  B088     		sub sp, sp, #32
+300004E6  2704     		mov r7, #4 ; 4
+300004E8  4639     		mov r1, r7
+300004EA  27C8     		mov r7, #200 ; 200
+300004EC  463A     		mov r2, r7
+300004EE  2700     		mov r7, #0 ; 0
+300004F0  463B     		mov r3, r7
+300004F2  2700     		mov r7, #0 ; 0
+300004F4  F8CD 7000		str r7, [sp]
+300004F8  2702     		mov r7, #2 ; 2
+300004FA  F8CD 7004		str r7, [sp, #+4]
+300004FE  27C9     		mov r7, #201 ; 201
+30000500  F8CD 7008		str r7, [sp, #+8]
+30000504  F8DF 703C		ldr r7, [pc, #+60] ; 0x24002BD4
+30000508  683F     		ldr r7, [r7]
+3000050A  F8CD 700C		str r7, [sp, #+12]
+3000050E  2704     		mov r7, #4 ; 4
+30000510  F8CD 7010		str r7, [sp, #+16]
+30000514  2702     		mov r7, #2 ; 2
+30000516  F8CD 7014		str r7, [sp, #+20]
+3000051A  F8DF 7034		ldr r7, [pc, #+52] ; 0x92FA34AE
+3000051E  463F     		mov r7, r7
+30000520  F8CD 7018		str r7, [sp, #+24]
+30000524  F8DF 4010		ldr r4, [pc, #+16] ; 0x806C3BD
+30000528  F044 0401		orr r4, r4, #1
+3000052C  47A0     		blx r4
+3000052E  B008     		add sp, sp, #32
+
+#13			ST		warningsKiller	{LNXT:5|3|-1}
+(*) USINT
+30000530  F8DF 7008		ldr r7, [pc, #+8] ; 0x24002BCD
+30000534  7038     		strb r0, [r7]
+
+30000536  E00D     		b #26
+
+30000538  FFFFFFFF		; 0x0806C3BD
+3000053C  24002BCD		; 0x24002BCD
+30000540  24002BD0		; 0x24002BD0
+30000544  24002BD4		; 0x24002BD4
+30000548  FFFFFFFF		; 0x2403C4B0
+3000054C  300000A0		; 0x300000A0
+30000550  92FA34AE		; 0x92FA34AE
+
+END_PROGRAM
+**************************************************
+	List program: MbMTCP
+**************************************************
+
+PROGRAM MbMTCP
+
+        VAR
+init : BOOL;
+dummyCRC32 : UDINT;
+	END_VAR
+
+END_PROGRAM
+
+#0		{SRC:MbMTCP}
+#1		(*$WAITSWITCH$*)
+#2		
+#3			(* init := sysMbMTcp_CheckMemorySize( 12,20,28,88,32,260); *)
+#4			LDP0		12	{LNXT:2|3|-1}
+(-) UDINT
+#5			sysMbMTcp_CheckMemorySize		20, 28, 88, 32, 260	{LNXT:2|3|-1}
+(*) USINT
+30000554  B082     		sub sp, sp, #8
+30000556  270C     		mov r7, #12 ; 12
+30000558  4638     		mov r0, r7
+3000055A  2714     		mov r7, #20 ; 20
+3000055C  4639     		mov r1, r7
+3000055E  271C     		mov r7, #28 ; 28
+30000560  463A     		mov r2, r7
+30000562  2758     		mov r7, #88 ; 88
+30000564  463B     		mov r3, r7
+30000566  2720     		mov r7, #32 ; 32
+30000568  F8CD 7000		str r7, [sp]
+3000056C  F44F 7782		mov r7, #260 ; 260
+30000570  F8CD 7004		str r7, [sp, #+4]
+30000574  F8DF 41B4		ldr r4, [pc, #+436] ; 0x8078B15
+30000578  F044 0401		orr r4, r4, #1
+3000057C  47A0     		blx r4
+3000057E  B002     		add sp, sp, #8
+
+#6			ST		init	{LNXT:2|3|-1}
+(*) BOOL
+30000580  F8DF 71B8		ldr r7, [pc, #+440] ; 0x24002BCF
+30000584  7038     		strb r0, [r7]
+
+#7		
+#8		
+#9			(* IF init *)
+#10			LD		init	{LNXT:3|-1|-1}
+(*) UNDEF
+30000586  F8DF 71B4		ldr r7, [pc, #+436] ; 0x24002BCF
+3000058A  7838     		ldrb r0, [r7]
+
+#11			NOT	{LNXT:3|-1|-1}
+(*) BOOL
+3000058C  2800     		cmp r0, #0
+3000058E  BF08 2001		eqmov r0, #1
+30000592  BF18 2000		nemov r0, #0
+
+#12			JMPCN	$label0	{LNXT:3|4|6}
+(-) BOOL
+30000596  2800     		cmp r0, #0
+30000598  D002     		beq #4 ; 0x300005A0
+
+
+#13		
+#14			(* THEN *)
+#15		
+#16				(* RETURN *)
+#17				RET
+#18		
+(-) BOOL
+3000059C  E0C4     		b #392 ; 0x30000728
+
+
+#19		$label0:
+#20			(* END_IF *)
+#21		
+#22			(* init := sysMbMTcp_InitMemory( TO_DWORD( ?$$sysMbQueueMsgMemory[0] ), $$sysMbQueueMsgNum, TO_DWORD( ?$$sysMbADUMemory[0] ), $$sysMbADUMemoryNum, 0 /* NULL */, 0, 0, TO_DWORD( ?$$sysInfoImgModbusMemory[ 0 ] ), TO_DWORD( ?$$sysInfoInpImgPlcMemory[ 0 ] ), TO_DWORD( ?$$sysInfoOutImgPlcMemory[ 0 ] )); *)
+#23			ADR		$$sysMbADUMemory[0]	{LNXT:6|7|-1}
+(*) BOOL
+300005A0  F8DF 019C		ldr r0, [pc, #+412] ; 0x24002BD8
+
+#24			TO_DWORD	{LNXT:6|7|-1}
+(-) @BYTE
+#25			ST		$$TMP3	{LNXT:6|7|-1}
+(*) DWORD
+300005A4  F8DF 719C		ldr r7, [pc, #+412] ; 0x240032F4
+300005A8  6038     		str r0, [r7]
+
+#26			ADR		$$sysInfoImgModbusMemory[0]	{LNXT:6|7|-1}
+(*) DWORD
+300005AA  F8DF 019C		ldr r0, [pc, #+412] ; 0x240032F8
+
+#27			TO_DWORD	{LNXT:6|7|-1}
+(-) @BYTE
+#28			ST		$$TMP5	{LNXT:6|7|-1}
+(*) DWORD
+300005AE  F8DF 719C		ldr r7, [pc, #+412] ; 0x24003348
+300005B2  6038     		str r0, [r7]
+
+#29			ADR		$$sysInfoInpImgPlcMemory[0]	{LNXT:6|7|-1}
+(*) DWORD
+300005B4  F8DF 0198		ldr r0, [pc, #+408] ; 0x2400334C
+
+#30			TO_DWORD	{LNXT:6|7|-1}
+(-) @BYTE
+#31			ST		$$TMP7	{LNXT:6|7|-1}
+(*) DWORD
+300005B8  F8DF 7198		ldr r7, [pc, #+408] ; 0x24003384
+300005BC  6038     		str r0, [r7]
+
+#32			ADR		$$sysInfoOutImgPlcMemory[0]	{LNXT:6|7|-1}
+(*) DWORD
+300005BE  F8DF 0198		ldr r0, [pc, #+408] ; 0x24003388
+
+#33			TO_DWORD	{LNXT:6|7|-1}
+(-) @BYTE
+#34			ST		$$TMP9	{LNXT:6|7|-1}
+(*) DWORD
+300005C2  F8DF 7198		ldr r7, [pc, #+408] ; 0x240034BC
+300005C6  6038     		str r0, [r7]
+
+#35			ADR		$$sysMbQueueMsgMemory[0]	{LNXT:6|7|-1}
+(*) DWORD
+300005C8  F8DF 0194		ldr r0, [pc, #+404] ; 0x240034C0
+
+#36			TO_DWORD	{LNXT:6|7|-1}
+(-) @BYTE
+#37			sysMbMTcp_InitMemory		$$sysMbQueueMsgNum, $$TMP3, $$sysMbADUMemoryNum, 0, 0, 0, $$TMP5, $$TMP7, $$TMP9	{LNXT:6|7|-1}
+(*) DWORD
+300005CC  B086     		sub sp, sp, #24
+300005CE  F8DF 7194		ldr r7, [pc, #+404] ; 0x24003678
+300005D2  6839     		ldr r1, [r7]
+300005D4  F8DF 716C		ldr r7, [pc, #+364] ; 0x240032F4
+300005D8  683A     		ldr r2, [r7]
+300005DA  F8DF 718C		ldr r7, [pc, #+396] ; 0x2400367C
+300005DE  683B     		ldr r3, [r7]
+300005E0  2700     		mov r7, #0 ; 0
+300005E2  F8CD 7000		str r7, [sp]
+300005E6  2700     		mov r7, #0 ; 0
+300005E8  F8CD 7004		str r7, [sp, #+4]
+300005EC  2700     		mov r7, #0 ; 0
+300005EE  F8CD 7008		str r7, [sp, #+8]
+300005F2  F8DF 7158		ldr r7, [pc, #+344] ; 0x24003348
+300005F6  683F     		ldr r7, [r7]
+300005F8  F8CD 700C		str r7, [sp, #+12]
+300005FC  F8DF 7154		ldr r7, [pc, #+340] ; 0x24003384
+30000600  683F     		ldr r7, [r7]
+30000602  F8CD 7010		str r7, [sp, #+16]
+30000606  F8DF 7154		ldr r7, [pc, #+340] ; 0x240034BC
+3000060A  683F     		ldr r7, [r7]
+3000060C  F8CD 7014		str r7, [sp, #+20]
+30000610  F8DF 411C		ldr r4, [pc, #+284] ; 0x8078B7D
+30000614  F044 0401		orr r4, r4, #1
+30000618  47A0     		blx r4
+3000061A  B006     		add sp, sp, #24
+
+#38			ST		init	{LNXT:6|7|-1}
+(*) BOOL
+3000061C  F8DF 711C		ldr r7, [pc, #+284] ; 0x24002BCF
+30000620  7038     		strb r0, [r7]
+
+#39		
+#40			(* init := sysMbMTcp_InitProcessImages(TO_DWORD( ?$$sysImgDiscInputStatusMemory[0] ), TO_DWORD( ?$$sysImgCoilStatusMemory[0] ), 0, 0, 0, 0, 0, 0, 2, 11, 0, 0, 0, 0, 0, 0); *)
+#41			ADR		$$sysImgCoilStatusMemory[0]	{LNXT:7|8|-1}
+(*) BOOL
+30000622  F8DF 0148		ldr r0, [pc, #+328] ; 0x24003680
+
+#42			TO_DWORD	{LNXT:7|8|-1}
+(-) @BOOL
+#43			ST		$$TMP3	{LNXT:7|8|-1}
+(*) DWORD
+30000626  F8DF 711C		ldr r7, [pc, #+284] ; 0x240032F4
+3000062A  6038     		str r0, [r7]
+
+#44			ADR		$$sysImgDiscInputStatusMemory[0]	{LNXT:7|8|-1}
+(*) DWORD
+3000062C  F8DF 0140		ldr r0, [pc, #+320] ; 0x2400368C
+
+#45			TO_DWORD	{LNXT:7|8|-1}
+(-) @BOOL
+#46			sysMbMTcp_InitProcessImages		$$TMP3, 0, 0, 0, 0, 0, 0, 2, 11, 0, 0, 0, 0, 0, 0	{LNXT:7|8|-1}
+(*) DWORD
+30000630  B08C     		sub sp, sp, #48
+30000632  F8DF 7110		ldr r7, [pc, #+272] ; 0x240032F4
+30000636  6839     		ldr r1, [r7]
+30000638  2700     		mov r7, #0 ; 0
+3000063A  463A     		mov r2, r7
+3000063C  2700     		mov r7, #0 ; 0
+3000063E  463B     		mov r3, r7
+30000640  2700     		mov r7, #0 ; 0
+30000642  F8CD 7000		str r7, [sp]
+30000646  2700     		mov r7, #0 ; 0
+30000648  F8CD 7004		str r7, [sp, #+4]
+3000064C  2700     		mov r7, #0 ; 0
+3000064E  F8CD 7008		str r7, [sp, #+8]
+30000652  2700     		mov r7, #0 ; 0
+30000654  F8CD 700C		str r7, [sp, #+12]
+30000658  2702     		mov r7, #2 ; 2
+3000065A  F8CD 7010		str r7, [sp, #+16]
+3000065E  270B     		mov r7, #11 ; 11
+30000660  F8CD 7014		str r7, [sp, #+20]
+30000664  2700     		mov r7, #0 ; 0
+30000666  F8CD 7018		str r7, [sp, #+24]
+3000066A  2700     		mov r7, #0 ; 0
+3000066C  F8CD 701C		str r7, [sp, #+28]
+30000670  2700     		mov r7, #0 ; 0
+30000672  F8CD 7020		str r7, [sp, #+32]
+30000676  2700     		mov r7, #0 ; 0
+30000678  F8CD 7024		str r7, [sp, #+36]
+3000067C  2700     		mov r7, #0 ; 0
+3000067E  F8CD 7028		str r7, [sp, #+40]
+30000682  2700     		mov r7, #0 ; 0
+30000684  F8CD 702C		str r7, [sp, #+44]
+30000688  F8DF 40A8		ldr r4, [pc, #+168] ; 0x8078BF1
+3000068C  F044 0401		orr r4, r4, #1
+30000690  47A0     		blx r4
+30000692  B00C     		add sp, sp, #48
+
+#47			ST		init	{LNXT:7|8|-1}
+(*) BOOL
+30000694  F8DF 70A4		ldr r7, [pc, #+164] ; 0x24002BCF
+30000698  7038     		strb r0, [r7]
+
+#48		
+#49			(* init := sysMbMTcp_InitNetConfiguration( 1, 1, 0, 4, 2, 11, TO_DWORD( ?$$sysMbMTcpSlaveList[ 0 ] ), 0, TO_DWORD( ?$$sysMbMTcpSlaveImage[ 0 ] ), TO_DWORD( ?$$sysMbMTcpPlcImageInput[ 0 ] ), TO_DWORD( ?$$sysMbMTcpPlcImageOutput[ 0 ] )); *)
+#50			ADR		$$sysMbMTcpSlaveList[0]	{LNXT:8|9|-1}
+(*) BOOL
+3000069A  F8DF 00DC		ldr r0, [pc, #+220] ; 0x30000140
+
+#51			TO_DWORD	{LNXT:8|9|-1}
+(-) @BOOL
+#52			ST		$$TMP3	{LNXT:8|9|-1}
+(*) DWORD
+3000069E  F8DF 70A4		ldr r7, [pc, #+164] ; 0x240032F4
+300006A2  6038     		str r0, [r7]
+
+#53			ADR		$$sysMbMTcpSlaveImage[0]	{LNXT:8|9|-1}
+(*) DWORD
+300006A4  F8DF 00D4		ldr r0, [pc, #+212] ; 0x30000168
+
+#54			TO_DWORD	{LNXT:8|9|-1}
+(-) @DWORD
+#55			ST		$$TMP5	{LNXT:8|9|-1}
+(*) DWORD
+300006A8  F8DF 70A0		ldr r7, [pc, #+160] ; 0x24003348
+300006AC  6038     		str r0, [r7]
+
+#56			ADR		$$sysMbMTcpPlcImageInput[0]	{LNXT:8|9|-1}
+(*) DWORD
+300006AE  F8DF 00D0		ldr r0, [pc, #+208] ; 0x30000208
+
+#57			TO_DWORD	{LNXT:8|9|-1}
+(-) @DWORD
+#58			ST		$$TMP7	{LNXT:8|9|-1}
+(*) DWORD
+300006B2  F8DF 70A0		ldr r7, [pc, #+160] ; 0x24003384
+300006B6  6038     		str r0, [r7]
+
+#59			ADR		$$sysMbMTcpPlcImageOutput[0]	{LNXT:8|9|-1}
+(*) DWORD
+300006B8  F8DF 00C8		ldr r0, [pc, #+200] ; 0x30000238
+
+#60			TO_DWORD	{LNXT:8|9|-1}
+(-) @DWORD
+#61			ST		$$TMP9	{LNXT:8|9|-1}
+(*) DWORD
+300006BC  F8DF 709C		ldr r7, [pc, #+156] ; 0x240034BC
+300006C0  6038     		str r0, [r7]
+
+#62			LDP0		1	{LNXT:8|9|-1}
+(-) DWORD
+#63			sysMbMTcp_InitNetConfiguration		1, 0, 4, 2, 11, $$TMP3, 0, $$TMP5, $$TMP7, $$TMP9	{LNXT:8|9|-1}
+(*) USINT
+300006C2  B088     		sub sp, sp, #32
+300006C4  2001     		mov r0, #1 ; 1
+300006C6  2101     		mov r1, #1 ; 1
+300006C8  2700     		mov r7, #0 ; 0
+300006CA  463A     		mov r2, r7
+300006CC  2704     		mov r7, #4 ; 4
+300006CE  463B     		mov r3, r7
+300006D0  2702     		mov r7, #2 ; 2
+300006D2  F8CD 7000		str r7, [sp]
+300006D6  270B     		mov r7, #11 ; 11
+300006D8  F8CD 7004		str r7, [sp, #+4]
+300006DC  F8DF 7064		ldr r7, [pc, #+100] ; 0x240032F4
+300006E0  683F     		ldr r7, [r7]
+300006E2  F8CD 7008		str r7, [sp, #+8]
+300006E6  2700     		mov r7, #0 ; 0
+300006E8  F8CD 700C		str r7, [sp, #+12]
+300006EC  F8DF 705C		ldr r7, [pc, #+92] ; 0x24003348
+300006F0  683F     		ldr r7, [r7]
+300006F2  F8CD 7010		str r7, [sp, #+16]
+300006F6  F8DF 705C		ldr r7, [pc, #+92] ; 0x24003384
+300006FA  683F     		ldr r7, [r7]
+300006FC  F8CD 7014		str r7, [sp, #+20]
+30000700  F8DF 7058		ldr r7, [pc, #+88] ; 0x240034BC
+30000704  683F     		ldr r7, [r7]
+30000706  F8CD 7018		str r7, [sp, #+24]
+3000070A  F8DF 402C		ldr r4, [pc, #+44] ; 0x8078CD1
+3000070E  F044 0401		orr r4, r4, #1
+30000712  47A0     		blx r4
+30000714  B008     		add sp, sp, #32
+
+#64			ST		init	{LNXT:8|9|-1}
+(*) BOOL
+30000716  F8DF 7024		ldr r7, [pc, #+36] ; 0x24002BCF
+3000071A  7038     		strb r0, [r7]
+
+#65		
+#66			(* dummyCRC32 := 2080768231; *)
+#67			MOVE		2080768231,dummyCRC32	{LNXT:9|2|-1}
+(*) BOOL
+3000071C  F8DF 7068		ldr r7, [pc, #+104] ; 0x7C0600E7
+30000720  4638     		mov r0, r7
+30000722  F8DF 7050		ldr r7, [pc, #+80] ; 0x24003690
+30000726  6038     		str r0, [r7]
+
+30000728  E030     		b #96
+
+3000072C  FFFFFFFF		; 0x08078B15
+30000730  FFFFFFFF		; 0x08078B7D
+30000734  FFFFFFFF		; 0x08078BF1
+30000738  FFFFFFFF		; 0x08078CD1
+3000073C  24002BCF		; 0x24002BCF
+30000740  24002BD8		; 0x24002BD8
+30000744  240032F4		; 0x240032F4
+30000748  240032F8		; 0x240032F8
+3000074C  24003348		; 0x24003348
+30000750  2400334C		; 0x2400334C
+30000754  24003384		; 0x24003384
+30000758  24003388		; 0x24003388
+3000075C  240034BC		; 0x240034BC
+30000760  240034C0		; 0x240034C0
+30000764  24003678		; 0x24003678
+30000768  2400367C		; 0x2400367C
+3000076C  24003680		; 0x24003680
+30000770  2400368C		; 0x2400368C
+30000774  24003690		; 0x24003690
+30000778  30000140		; 0x30000140
+3000077C  30000168		; 0x30000168
+30000780  30000208		; 0x30000208
+30000784  30000238		; 0x30000238
+30000788  7C0600E7		; 0x7C0600E7
+
+END_PROGRAM
+**************************************************
+	List program: $$IOConfig
+**************************************************
+
+PROGRAM $$IOConfig
+
+        VAR
+warningsKiller : BOOL;
+	END_VAR
+
+END_PROGRAM
+
+#0		{SRC:$$IOConfig}
+#1		(*$WAITSWITCH$*)
+#2		
+#3			(* warningsKiller := sysCfgAnalogRes(16); *)
+#4			LDP0		16	{LNXT:4|7|-1}
+(-) UDINT
+#5			sysCfgAnalogRes	{LNXT:4|7|-1}
+(*) USINT
+3000078C  2010     		mov r0, #16 ; 16
+3000078E  F8DF 40BC		ldr r4, [pc, #+188] ; 0x8073169
+30000792  F044 0401		orr r4, r4, #1
+30000796  47A0     		blx r4
+
+#6			ST		warningsKiller	{LNXT:4|7|-1}
+(*) BOOL
+30000798  F8DF 70B8		ldr r7, [pc, #+184] ; 0x24002BCC
+3000079C  7038     		strb r0, [r7]
+
+#7		
+#8			(* warningsKiller := sysCfgProgInput(0, 0); *)
+#9			LDP0		0	{LNXT:7|8|-1}
+(-) BOOL
+#10			sysCfgProgInput		0	{LNXT:7|8|-1}
+(*) USINT
+3000079E  2000     		mov r0, #0 ; 0
+300007A0  2100     		mov r1, #0 ; 0
+300007A2  F8DF 40AC		ldr r4, [pc, #+172] ; 0x8073175
+300007A6  F044 0401		orr r4, r4, #1
+300007AA  47A0     		blx r4
+
+#11			ST		warningsKiller	{LNXT:7|8|-1}
+(*) BOOL
+300007AC  F8DF 70A4		ldr r7, [pc, #+164] ; 0x24002BCC
+300007B0  7038     		strb r0, [r7]
+
+#12		
+#13			(* warningsKiller := sysCfgProgInput(1, 0); *)
+#14			LDP0		1	{LNXT:8|9|-1}
+(-) BOOL
+#15			sysCfgProgInput		0	{LNXT:8|9|-1}
+(*) USINT
+300007B2  2001     		mov r0, #1 ; 1
+300007B4  2100     		mov r1, #0 ; 0
+300007B6  F8DF 4098		ldr r4, [pc, #+152] ; 0x8073175
+300007BA  F044 0401		orr r4, r4, #1
+300007BE  47A0     		blx r4
+
+#16			ST		warningsKiller	{LNXT:8|9|-1}
+(*) BOOL
+300007C0  F8DF 7090		ldr r7, [pc, #+144] ; 0x24002BCC
+300007C4  7038     		strb r0, [r7]
+
+#17		
+#18			(* warningsKiller := sysCfgProgInput(2, 0); *)
+#19			LDP0		2	{LNXT:9|10|-1}
+(-) BOOL
+#20			sysCfgProgInput		0	{LNXT:9|10|-1}
+(*) USINT
+300007C6  2002     		mov r0, #2 ; 2
+300007C8  2100     		mov r1, #0 ; 0
+300007CA  F8DF 4084		ldr r4, [pc, #+132] ; 0x8073175
+300007CE  F044 0401		orr r4, r4, #1
+300007D2  47A0     		blx r4
+
+#21			ST		warningsKiller	{LNXT:9|10|-1}
+(*) BOOL
+300007D4  F8DF 707C		ldr r7, [pc, #+124] ; 0x24002BCC
+300007D8  7038     		strb r0, [r7]
+
+#22		
+#23			(* warningsKiller := sysCfgProgInput(3, 0); *)
+#24			LDP0		3	{LNXT:10|11|-1}
+(-) BOOL
+#25			sysCfgProgInput		0	{LNXT:10|11|-1}
+(*) USINT
+300007DA  2003     		mov r0, #3 ; 3
+300007DC  2100     		mov r1, #0 ; 0
+300007DE  F8DF 4070		ldr r4, [pc, #+112] ; 0x8073175
+300007E2  F044 0401		orr r4, r4, #1
+300007E6  47A0     		blx r4
+
+#26			ST		warningsKiller	{LNXT:10|11|-1}
+(*) BOOL
+300007E8  F8DF 7068		ldr r7, [pc, #+104] ; 0x24002BCC
+300007EC  7038     		strb r0, [r7]
+
+#27		
+#28			(* warningsKiller := sysCfgProgInput(4, 0); *)
+#29			LDP0		4	{LNXT:11|12|-1}
+(-) BOOL
+#30			sysCfgProgInput		0	{LNXT:11|12|-1}
+(*) USINT
+300007EE  2004     		mov r0, #4 ; 4
+300007F0  2100     		mov r1, #0 ; 0
+300007F2  F8DF 405C		ldr r4, [pc, #+92] ; 0x8073175
+300007F6  F044 0401		orr r4, r4, #1
+300007FA  47A0     		blx r4
+
+#31			ST		warningsKiller	{LNXT:11|12|-1}
+(*) BOOL
+300007FC  F8DF 7054		ldr r7, [pc, #+84] ; 0x24002BCC
+30000800  7038     		strb r0, [r7]
+
+#32		
+#33			(* warningsKiller := sysCfgProgInput(5, 0); *)
+#34			LDP0		5	{LNXT:12|13|-1}
+(-) BOOL
+#35			sysCfgProgInput		0	{LNXT:12|13|-1}
+(*) USINT
+30000802  2005     		mov r0, #5 ; 5
+30000804  2100     		mov r1, #0 ; 0
+30000806  F8DF 4048		ldr r4, [pc, #+72] ; 0x8073175
+3000080A  F044 0401		orr r4, r4, #1
+3000080E  47A0     		blx r4
+
+#36			ST		warningsKiller	{LNXT:12|13|-1}
+(*) BOOL
+30000810  F8DF 7040		ldr r7, [pc, #+64] ; 0x24002BCC
+30000814  7038     		strb r0, [r7]
+
+#37		
+#38			(* warningsKiller := sysCfgProgInput(6, 0); *)
+#39			LDP0		6	{LNXT:13|14|-1}
+(-) BOOL
+#40			sysCfgProgInput		0	{LNXT:13|14|-1}
+(*) USINT
+30000816  2006     		mov r0, #6 ; 6
+30000818  2100     		mov r1, #0 ; 0
+3000081A  F8DF 4034		ldr r4, [pc, #+52] ; 0x8073175
+3000081E  F044 0401		orr r4, r4, #1
+30000822  47A0     		blx r4
+
+#41			ST		warningsKiller	{LNXT:13|14|-1}
+(*) BOOL
+30000824  F8DF 702C		ldr r7, [pc, #+44] ; 0x24002BCC
+30000828  7038     		strb r0, [r7]
+
+#42		
+#43			(* warningsKiller := sysCfgProgInput(7, 0); *)
+#44			LDP0		7	{LNXT:14|4|-1}
+(-) BOOL
+#45			sysCfgProgInput		0	{LNXT:14|4|-1}
+(*) USINT
+3000082A  2007     		mov r0, #7 ; 7
+3000082C  2100     		mov r1, #0 ; 0
+3000082E  F8DF 4020		ldr r4, [pc, #+32] ; 0x8073175
+30000832  F044 0401		orr r4, r4, #1
+30000836  47A0     		blx r4
+
+#46			ST		warningsKiller	{LNXT:14|4|-1}
+(*) BOOL
+30000838  F8DF 7018		ldr r7, [pc, #+24] ; 0x24002BCC
+3000083C  7038     		strb r0, [r7]
+
+3000083E  E8BD 0FF0		ldmia sp!, { r4, r5, r6, r7, r8, r9, r10, r11 }
+30000842  F8DD E000		ldr lr, [sp]
+30000846  B002     		add sp, sp, #8
+
+30000848  4770     		bx lr
+
+3000084C  FFFFFFFF		; 0x08073169
+30000850  FFFFFFFF		; 0x08073175
+30000854  24002BCC		; 0x24002BCC
+
+END_PROGRAM
+
+
+**************************************************
+	Target variable image generation
+**************************************************
+
+
+*** INPUT:
+30000858  4770     		bx lr
+
+
+*** OUTPUT:
+3000085A  4770     		bx lr
+
+
+
+**************************************************
+	Task Init init code
+**************************************************
+
+3000085C  B082     		sub sp, sp, #8
+3000085E  F8CD E000		str lr, [sp]
+30000862  E92D 0FF0		stmdb sp!, { r4, r5, r6, r7, r8, r9, r10, r11 }
+
+30000866  E8BD 0FF0		ldmia sp!, { r4, r5, r6, r7, r8, r9, r10, r11 }
+3000086A  F8DD E000		ldr lr, [sp]
+3000086E  B002     		add sp, sp, #8
+
+30000870  4770     		bx lr
+
+
+
+**************************************************
+	Global init code
+**************************************************
+
+30000880  B082     		sub sp, sp, #8
+30000882  F8CD E000		str lr, [sp]
+30000886  E92D 0FF0		stmdb sp!, { r4, r5, r6, r7, r8, r9, r10, r11 }
+
+Var init: V:MODBUSTCP_CFG:$$SYSMBQUEUEMSGNUM = 5
+3000088A  F8DF 0020		ldr r0, [pc, #+32] ; 0x5
+3000088E  F8DF 7024		ldr r7, [pc, #+36] ; 0x24003678
+30000892  6038     		str r0, [r7]
+
+Var init: V:MODBUSTCP_CFG:$$SYSMBADUMEMORYNUM = 7
+30000894  F8DF 0018		ldr r0, [pc, #+24] ; 0x7
+30000898  F8DF 701C		ldr r7, [pc, #+28] ; 0x2400367C
+3000089C  6038     		str r0, [r7]
+
+3000089E  E8BD 0FF0		ldmia sp!, { r4, r5, r6, r7, r8, r9, r10, r11 }
+300008A2  F8DD E000		ldr lr, [sp]
+300008A6  B002     		add sp, sp, #8
+
+300008A8  4770     		bx lr
+
+300008AC  00000005		; 0x00000005
+300008B0  00000007		; 0x00000007
+300008B4  24003678		; 0x24003678
+300008B8  2400367C		; 0x2400367C
+
+
+
+**************************************************
+	Global RETAIN init code
+**************************************************
+
+300008BC  B082     		sub sp, sp, #8
+300008BE  F8CD E000		str lr, [sp]
+300008C2  E92D 0FF0		stmdb sp!, { r4, r5, r6, r7, r8, r9, r10, r11 }
+
+300008C6  E8BD 0FF0		ldmia sp!, { r4, r5, r6, r7, r8, r9, r10, r11 }
+300008CA  F8DD E000		ldr lr, [sp]
+300008CE  B002     		add sp, sp, #8
+
+300008D0  4770     		bx lr
+
+
+
+**************************************************
+	Task $$VirtualTables init code
+**************************************************
+
+300008D2  B082     		sub sp, sp, #8
+300008D4  F8CD E000		str lr, [sp]
+300008D8  E92D 0FF0		stmdb sp!, { r4, r5, r6, r7, r8, r9, r10, r11 }
+
+300008DC  E8BD 0FF0		ldmia sp!, { r4, r5, r6, r7, r8, r9, r10, r11 }
+300008E0  F8DD E000		ldr lr, [sp]
+300008E4  B002     		add sp, sp, #8
+
+300008E6  4770     		bx lr
+
+
+
+********************************************
+MEMORY MAP
+********************************************
+
+Code area type:          		       main code
+Start code area:          		0000000030000000h
+End code area:            		0000000030000B3Ch
+Code size:                		00000B3Ch
+
+Start local data area:    		0000000024002BC0h
+End local data area:      		0000000024003694h
+Local data size:          		00000AD4h
+
+Start retentive data area:		00000000240027C0h
+End retentive data area:  		00000000240027C0h
+Retentive data size:      		00000000h
+
+Start bit data area:      		0000000000000000h
+End bit data area:        		0000000000000000h
+Bit data size:            		00000000h
+
+
+
+********************************************
+CODE ID:                                3075E558
+DEBUG MEMO ID:                          300031F4
+FULL MEMO ID:                           00009CA7
+********************************************

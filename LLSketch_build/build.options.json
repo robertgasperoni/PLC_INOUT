@@ -1,0 +1,11 @@
+{
+  "additionalFiles": "",
+  "builtInToolsFolders": "",
+  "compiler.optimization_flags": "",
+  "customBuildProperties": "",
+  "fqbn": "arduino:mbed_opta:opta",
+  "hardwareFolders": "C:\\Users\\Utente\\AppData\\Local\\T\\A\\packages",
+  "otherLibrariesFolders": "C:\\Users\\Utente\\AppData\\Local\\T\\U\\libraries",
+  "runtime.ide.version": "10607",
+  "sketchLocation": "D:\\Progetti\\SCM\\Anno_2023_SCM_Group\\ArduinoOpta\\PLC_INOUT\\LLSketch"
+}

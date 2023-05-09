@@ -1,0 +1,19 @@
+profiles:
+  pmc_1.0.3:
+    fqbn: arduino:mbed_portenta:envie_m7
+    platforms:
+      - platform: arduino:mbed_portenta (3.5.4)
+    libraries:
+      - AlPlc_PMC (1.0.3)
+      - Arduino_MachineControl (1.1.1)
+      - ArduinoRS485 (1.0.5)
+
+
+  opta_1.0.3:
+    fqbn: arduino:mbed_opta:opta
+    platforms:
+      - platform: arduino:mbed_opta (3.5.4)
+    libraries:
+      - AlPlc_Opta (1.0.3)
+      - ArduinoRS485 (1.0.5)
+

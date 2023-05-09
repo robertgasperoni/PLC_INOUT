@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- #DEFINE PREFIX Opta_PLC__1p0 -->
+<devicetemplate>
+	<deviceinfo caption="Opta PLC" name="Opta PLC" version="1.0" icon="modbus.ico" deviceid="Opta_PLC__1p0" editingEnabled="true">
+		<description></description>
+		<protocols>
+			<protocol>ModbusRTU_master</protocol>
+			<protocol>ModbusTCP_master</protocol>
+		</protocols>
+	</deviceinfo>
+	<deviceconfig>
+		<parameters nextIpa="13">
+			<!--		<par ipa="1" readonly="no" name="Example" typepar="short" typetarg="short" defval="0" scale="1" offs="0" um="" form="" descr="Example parameter" min="0" max="9999" shortdescr=""/>
+				<protocol name="Modbus" commaddr="1" commsubindex="0"/>
+			</par> -->
+			<par ipa="0" readonly="false" name="Led1" typepar="digitalOutput" typetarg="digitalOutput" form="" descr="">
+				<protocol name="Modbus" commaddr="1" commsubindex="0"/>
+			</par>
+			<par ipa="1" readonly="false" name="Led2" typepar="digitalOutput" typetarg="digitalOutput" form="" descr="">
+				<protocol name="Modbus" commaddr="2" commsubindex="0"/>
+			</par>
+			<par ipa="2" readonly="false" name="Led3" typepar="digitalOutput" typetarg="digitalOutput" form="" descr="">
+				<protocol name="Modbus" commaddr="3" commsubindex="0"/>
+			</par>
+			<par ipa="3" readonly="false" name="Led4" typepar="digitalOutput" typetarg="digitalOutput" form="" descr="">
+				<protocol name="Modbus" commaddr="4" commsubindex="0"/>
+			</par>
+			<par ipa="4" readonly="false" name="LedR" typepar="digitalOutput" typetarg="digitalOutput" form="" descr="">
+				<protocol name="Modbus" commaddr="5" commsubindex="0"/>
+			</par>
+			<par ipa="5" readonly="false" name="LedG" typepar="digitalOutput" typetarg="digitalOutput" form="" descr="">
+				<protocol name="Modbus" commaddr="6" commsubindex="0"/>
+			</par>
+			<par ipa="6" readonly="false" name="LedB" typepar="digitalOutput" typetarg="digitalOutput" form="" descr="">
+				<protocol name="Modbus" commaddr="7" commsubindex="0"/>
+			</par>
+			<par ipa="7" readonly="true" name="User_Btn" typepar="digitalInput" typetarg="digitalInput" form="" descr="">
+				<protocol name="Modbus" commaddr="8" commsubindex="0"/>
+			</par>
+			<par ipa="8" readonly="false" name="Rele1" typepar="digitalOutput" typetarg="digitalOutput" form="" descr="">
+				<protocol name="Modbus" commaddr="9" commsubindex="0"/>
+			</par>
+			<par ipa="9" readonly="false" name="Rele2" typepar="digitalOutput" typetarg="digitalOutput" form="" descr="">
+				<protocol name="Modbus" commaddr="10" commsubindex="0"/>
+			</par>
+			<par ipa="10" readonly="false" name="Rele3" typepar="digitalOutput" typetarg="digitalOutput" form="" descr="">
+				<protocol name="Modbus" commaddr="11" commsubindex="0"/>
+			</par>
+			<par ipa="11" readonly="false" name="Rele4" typepar="digitalOutput" typetarg="digitalOutput" form="" descr="">
+				<protocol name="Modbus" commaddr="12" commsubindex="0"/>
+			</par>
+			<par ipa="12" readonly="true" name="I1" typepar="digitalInput" typetarg="digitalInput" form="" descr="">
+				<protocol name="Modbus" commaddr="13" commsubindex="0"/>
+			</par>
+		</parameters>
+		<enums/>
+	</deviceconfig>
+	<plcconfig>
+		<hmi>
+			<tree name="tree1">
+				<node name="PREFIX" caption="Opta PLC" icon="modbus.ico" datalink="PREFIX" menu="menuRemoveEnableDisable" window="ModbusCustomMain"/>
+			</tree>
+		</hmi>
+		<templatedata>
+			<PREFIX enabled="true">
+				<ModbusCustom_config>
+					<modbusAddress>1</modbusAddress>
+					<nodeNumber>-1</nodeNumber>
+					<pollTime>0</pollTime>
+					<timeout>1000</timeout>
+					<ip/>
+					<inputs/>
+					<outputs/>
+					<turnAround>0</turnAround>
+					<sendParams/>
+					<minPollTime>1</minPollTime>
+				</ModbusCustom_config>
+			</PREFIX>
+		</templatedata>
+		<datadef version="2.0">
+			<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+				<xs:element name="PREFIX">
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="TModbusCustom">
+								<xs:attribute name="overlappedBitRegMaps" type="xs:boolean" fixed="0"/>
+								<xs:attribute name="maxMsgSizeReg" type="xs:integer" fixed="120"/>
+								<xs:attribute name="maxMsgSizeBit" type="xs:integer" fixed="2000"/>
+								<xs:attribute name="useWriteSingleCoil" type="xs:boolean" fixed="0"/>
+								<xs:attribute name="useWriteSingleReg" type="xs:boolean" fixed="0"/>
+								<xs:attribute name="addressType" type="xs:string" fixed="modbus"/>
+							</xs:extension>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+			</xs:schema>
+		</datadef>
+	</plcconfig>
+</devicetemplate>
